@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 interface CategoriesQueryResult {
-
   allMdx: {
     group: Array<{
       fieldValue: string;
