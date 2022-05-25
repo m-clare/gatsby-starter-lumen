@@ -195,11 +195,12 @@ export default {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-optimize-svgs",
     "gatsby-plugin-sass",
+    "gatsby-remark-images",
     {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".md", ".mdx"],
-        plugins: [
+        gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-images",
             options: {
