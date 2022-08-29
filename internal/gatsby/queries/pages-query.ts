@@ -3,7 +3,7 @@ import { CreatePagesArgs } from "gatsby";
 import * as types from "../types";
 
 export interface PagesQueryResult {
-  allMarkdownRemark: {
+  allMdx: {
     edges?: Array<types.Edge>;
   };
 }
@@ -11,7 +11,7 @@ export interface PagesQueryResult {
 const pagesQuery = async (graphql: CreatePagesArgs["graphql"]) => {
   const result = await graphql<PagesQueryResult>(`
     {
-      allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+      allMdx(filter: { frontmatter: { draft: { ne: true } } }) {
         edges {
           node {
             frontmatter {
@@ -26,7 +26,7 @@ const pagesQuery = async (graphql: CreatePagesArgs["graphql"]) => {
     }
   `);
 
-  return result?.data?.allMarkdownRemark?.edges ?? [];
+  return result?.data?.allMdx?.edges ?? [];
 };
 
 export default pagesQuery;

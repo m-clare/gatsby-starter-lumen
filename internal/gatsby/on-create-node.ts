@@ -12,7 +12,7 @@ const onCreateNode: GatsbyNode["onCreateNode"] = ({
 }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === "MarkdownRemark" || node.internal.type === "Mdx") {
     const { frontmatter, parent }: types.Edge["node"] = node;
     const { tags, category, slug } = frontmatter || {};
 

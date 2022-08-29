@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Post: React.FC<Props> = ({ post }: Props) => {
-  const { html } = post;
+  const { body } = post;
   const { tagSlugs, slug } = post.fields;
   const { tags, title, date } = post.frontmatter;
 
@@ -28,7 +28,7 @@ const Post: React.FC<Props> = ({ post }: Props) => {
       </Link>
 
       <div className={styles.content}>
-        <Content body={html} title={title} />
+        <Content body={body} title={title} />
       </div>
 
       <div className={styles.footer}>

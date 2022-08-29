@@ -2,6 +2,7 @@
 title: "Contact me"
 template: "page"
 socialImage: "/book.jpg"
+category: "test"
 ---
 
 Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.

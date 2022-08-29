@@ -59,6 +59,8 @@
     "gatsby-plugin-image": "^2.20.0",
     "gatsby-plugin-manifest": "^4.20.0",
     "gatsby-plugin-offline": "^5.20.0",
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
     "gatsby-plugin-optimize-svgs": "^1.0.5",
     "gatsby-plugin-react-helmet": "^5.20.0",
     "gatsby-plugin-sass": "^5.20.0",

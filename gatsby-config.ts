@@ -38,7 +38,7 @@ export default {
         feeds: [
           {
             serialize: ({
-              query: { site, allMarkdownRemark },
+              query: { site, allMdx },
             }: {
               query: {
                 site: {
@@ -46,12 +46,12 @@ export default {
                     url: string;
                   };
                 };
-                allMarkdownRemark: {
+                allMdx: {
                   edges: Array<types.Edge>;
                 };
               };
             }) =>
-              allMarkdownRemark.edges.map(({ node }) => ({
+              allMdx.edges.map(({ node }) => ({
                 ...node.frontmatter,
                 date: node?.frontmatter?.date,
                 description: node?.frontmatter?.description,
@@ -61,7 +61,7 @@ export default {
               })),
             query: `
               {
-                allMarkdownRemark(
+                allMdx(
                   limit: 1000,
                   sort: { order: DESC, fields: [frontmatter___date] },
                   filter: { frontmatter: { template: { eq: "post" }, draft: { ne: true } } }
@@ -195,5 +195,30 @@ export default {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-optimize-svgs",
     "gatsby-plugin-sass",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        extensions: [".md", ".mdx"],
+        plugins: [
+        {
+          resolve: "gatsby-remark-images",
+          options: {
+            maxWidth: 960,
+            withWebp: true,
+          },
+        },
+        {
+          resolve: "gatsby-remark-responsive-iframe",
+          options: { wrapperStyle: "margin-bottom: 1.0725rem" },
+        },
+        "gatsby-remark-autolink-headers",
+        "gatsby-remark-prismjs",
+        "gatsby-remark-copy-linked-files",
+        "gatsby-remark-smartypants",
+        "gatsby-remark-external-links",
+      ],
+
+      }
+    }
   ],
 };

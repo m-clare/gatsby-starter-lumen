@@ -9,13 +9,13 @@ import { Node } from "@/types";
 
 interface Props {
   data: {
-    markdownRemark: Node;
+    mdx: Node;
   };
 }
 
 const PostTemplate: React.FC<Props> = ({ data }: Props) => {
   const { title: siteTitle, subtitle: siteSubtitle } = useSiteMetadata();
-  const { frontmatter } = data.markdownRemark;
+  const { frontmatter } = data.mdx;
   const { title, description = "", socialImage } = frontmatter;
   const metaDescription = description || siteSubtitle;
 
@@ -25,16 +25,16 @@ const PostTemplate: React.FC<Props> = ({ data }: Props) => {
       description={metaDescription}
       socialImage={socialImage}
     >
-      <Post post={data.markdownRemark} />
+      <Post post={data.mdx} />
     </Layout>
   );
 };
 
 export const query = graphql`
   query PostTemplate($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
-      html
+      body
       fields {
         slug
         tagSlugs
