@@ -16,6 +16,7 @@ export default {
     disqusShortname: config.disqusShortname,
   },
   plugins: [
+    `gatsby-plugin-mdx`,
     {
       resolve: "gatsby-source-filesystem",
       options: {

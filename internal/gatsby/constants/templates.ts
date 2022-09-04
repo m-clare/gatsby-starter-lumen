@@ -16,6 +16,7 @@ const templates = Object.freeze({
   tagTemplate: path.resolve("./src/templates/TagTemplate/TagTemplate.tsx"),
   tagsTemplate: path.resolve("./src/templates/TagsTemplate/TagsTemplate.tsx"),
   pageTemplate: path.resolve("./src/templates/PageTemplate/PageTemplate.tsx"),
+  mdxPageTemplate: path.resolve("./src/templates/MdxPageTemplate/MdxPageTemplate.tsx"),
   postTemplate: path.resolve("./src/templates/PostTemplate/PostTemplate.tsx"),
 });
 

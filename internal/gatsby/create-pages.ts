@@ -57,6 +57,22 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions }) => {
     }
   });
 
+  const mdxPages = await queries.mdxPagesQuery(graphql);
+
+  mdxPages.forEach((edge) => {
+    const { node } = edge;
+
+    if (node?.frontmatter?.template === "page" && node?.frontmatter?.slug) {
+
+      createPage({
+        path: node.frontmatter.slug,
+        component: `${constants.templates.mdxPageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+        context: { slug: node.frontmatter.slug },
+      });
+    }
+
+  })
+
   const createWithPagination: CreateWithPagination = ({
     group,
     template,
