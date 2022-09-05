@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 interface TagsQueryResult {
-  allMarkdownRemark: {
+  allMdx: {
     group: Array<{
       fieldValue: string;
       totalCount: number;
@@ -10,10 +10,10 @@ interface TagsQueryResult {
 }
 
 const useTagsList = () => {
-  const { allMarkdownRemark } = useStaticQuery<TagsQueryResult>(
+  const { allMdx } = useStaticQuery<TagsQueryResult>(
     graphql`
       query TagsListQuery {
-        allMarkdownRemark(
+        allMdx(
           filter: {
             frontmatter: { template: { eq: "post" }, draft: { ne: true } }
           }
@@ -27,7 +27,7 @@ const useTagsList = () => {
     `,
   );
 
-  return allMarkdownRemark.group || [];
+  return allMdx.group || [];
 };
 
 export default useTagsList;

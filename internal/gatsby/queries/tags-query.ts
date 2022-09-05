@@ -1,7 +1,7 @@
 import { CreatePagesArgs } from "gatsby";
 
 interface TagsQueryResult {
-  allMarkdownRemark: {
+  allMdx: {
     group: Array<{
       fieldValue: string;
       totalCount: number;
@@ -12,7 +12,7 @@ interface TagsQueryResult {
 const tagsQuery = async (graphql: CreatePagesArgs["graphql"]) => {
   const result = await graphql<TagsQueryResult>(`
     {
-      allMarkdownRemark(
+      allMdx(
         filter: {
           frontmatter: { template: { eq: "post" }, draft: { ne: true } }
         }
@@ -25,7 +25,7 @@ const tagsQuery = async (graphql: CreatePagesArgs["graphql"]) => {
     }
   `);
 
-  return result?.data?.allMarkdownRemark?.group || [];
+  return result?.data?.allMdx?.group || [];
 };
 
 export default tagsQuery;
