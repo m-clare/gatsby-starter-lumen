@@ -8,11 +8,11 @@ import { Page } from "@/components/Page";
 import { Pagination } from "@/components/Pagination";
 import { Sidebar } from "@/components/Sidebar";
 import { useSiteMetadata } from "@/hooks";
-import { AllMarkdownRemark, PageContext } from "@/types";
+import { AllMdx, PageContext } from "@/types";
 
 interface Props {
   data: {
-    allMarkdownRemark: AllMarkdownRemark;
+    allMdx: AllMdx;
   };
   pageContext: PageContext;
 }
@@ -24,7 +24,7 @@ const TagTemplate: React.FC<Props> = ({ data, pageContext }: Props) => {
   const { currentPage, prevPagePath, nextPagePath, hasPrevPage, hasNextPage } =
     pagination;
 
-  const { edges } = data.allMarkdownRemark;
+  const { edges } = data.allMdx;
   const pageTitle =
     currentPage > 0
       ? `${group} - Page ${currentPage} - ${siteTitle}`
@@ -54,7 +54,7 @@ export const query = graphql`
         subtitle
       }
     }
-    allMarkdownRemark(
+    allMdx(
       limit: $limit
       skip: $offset
       filter: {

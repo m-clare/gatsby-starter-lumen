@@ -57,30 +57,6 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions }) => {
     }
   });
 
-  // const mdxPages = await queries.mdxPagesQuery(graphql);
-
-  // console.log("MDX")
-  // mdxPages.forEach((edge) => {
-  //   const { node } = edge;
-  //   // console.log(node.frontmatter)
-  //   console.log(node.fields)
-  //   if (node?.frontmatter?.template === "page" && node?.fields?.slug) {
-
-  //     createPage({
-  //       path: node.fields.slug,
-  //       component: `${constants.templates.mdxPageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
-  //       context: { slug: node.fields.slug },
-  //     });
-  //   } else if (node?.frontmatter?.template === "post" && node?.fields?.slug) {
-
-  //     createPage({
-  //       path: node.fields.slug,
-  //       component: `${constants.templates.postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
-  //       context: { slug: node.fields.slug },
-  //     });
-  //   }
-  // })
-
   const createWithPagination: CreateWithPagination = ({
     group,
     template,

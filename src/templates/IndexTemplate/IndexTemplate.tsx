@@ -8,11 +8,11 @@ import { Page } from "@/components/Page";
 import { Pagination } from "@/components/Pagination";
 import { Sidebar } from "@/components/Sidebar";
 import { useSiteMetadata } from "@/hooks";
-import { AllMarkdownRemark, PageContext } from "@/types";
+import { AllMdx, PageContext } from "@/types";
 
 interface Props {
   data: {
-    allMarkdownRemark: AllMarkdownRemark;
+    allMdx: AllMdx;
   };
   pageContext: PageContext;
 }
@@ -24,7 +24,7 @@ const IndexTemplate: React.FC<Props> = ({ data, pageContext }: Props) => {
   const { currentPage, hasNextPage, hasPrevPage, prevPagePath, nextPagePath } =
     pagination;
 
-  const { edges } = data.allMarkdownRemark;
+  const { edges } = data.allMdx;
   const pageTitle =
     currentPage > 0 ? `Posts - Page ${currentPage} - ${siteTitle}` : siteTitle;
 
@@ -46,7 +46,7 @@ const IndexTemplate: React.FC<Props> = ({ data, pageContext }: Props) => {
 
 export const query = graphql`
   query IndexTemplate($limit: Int!, $offset: Int!) {
-    allMarkdownRemark(
+    allMdx(
       limit: $limit
       skip: $offset
       sort: { order: DESC, fields: [frontmatter___date] }
