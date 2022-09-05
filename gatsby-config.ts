@@ -16,7 +16,29 @@ export default {
     disqusShortname: config.disqusShortname,
   },
   plugins: [
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 960,
+              withWebp: true,
+            },
+          },
+          {
+            resolve: "gatsby-remark-responsive-iframe",
+            options: { wrapperStyle: "margin-bottom: 1.0725rem" },
+          },
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-autolink-headers`,
+          `gatsby-remark-copy-linked-files`,
+          "gatsby-remark-external-links",
+        ],
+        extensions: [`.md`, `.mdx`],
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {

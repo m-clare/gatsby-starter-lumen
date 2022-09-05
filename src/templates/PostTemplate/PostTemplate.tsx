@@ -1,5 +1,6 @@
 import React from "react";
 
+import { MDXProvider } from "@mdx-js/react";
 import { graphql } from "gatsby";
 
 import { Layout } from "@/components/Layout";
@@ -8,14 +9,13 @@ import { useSiteMetadata } from "@/hooks";
 import { Node } from "@/types";
 
 interface Props {
-  data: {
-    markdownRemark: Node;
-  };
+  data: Node;
+  children: React.ReactNode;
 }
 
-const PostTemplate: React.FC<Props> = ({ data }: Props) => {
+const PostTemplate: React.FC<Props> = ({ data, children }: Props) => {
   const { title: siteTitle, subtitle: siteSubtitle } = useSiteMetadata();
-  const { frontmatter } = data.markdownRemark;
+  const { frontmatter } = data.mdx;
   const { title, description = "", socialImage } = frontmatter;
   const metaDescription = description || siteSubtitle;
 
@@ -25,16 +25,17 @@ const PostTemplate: React.FC<Props> = ({ data }: Props) => {
       description={metaDescription}
       socialImage={socialImage}
     >
-      <Post post={data.markdownRemark} />
+      <Post post={data.mdx}>
+        <MDXProvider>{children}</MDXProvider>
+      </Post>
     </Layout>
   );
 };
 
 export const query = graphql`
-  query PostTemplate($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+  query ($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
-      html
       fields {
         slug
         tagSlugs

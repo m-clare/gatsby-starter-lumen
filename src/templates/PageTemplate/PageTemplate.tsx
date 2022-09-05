@@ -1,5 +1,6 @@
 import React from "react";
 
+import { MDXProvider } from "@mdx-js/react";
 import { graphql } from "gatsby";
 
 import { Layout } from "@/components/Layout";
@@ -9,37 +10,30 @@ import { useSiteMetadata } from "@/hooks";
 import { Node } from "@/types";
 
 interface Props {
-  data: {
-    markdownRemark: Node;
-  };
+  data: Node;
+  children: React.ReactNode;
 }
 
-const PageTemplate: React.FC<Props> = ({ data }: Props) => {
+const PageTemplate: React.FC<Props> = ({ data, children }: Props) => {
   const { title: siteTitle, subtitle: siteSubtitle } = useSiteMetadata();
-  const { html: body } = data.markdownRemark;
-  const { frontmatter } = data.markdownRemark;
-  const { title, description = "", socialImage } = frontmatter;
+  const { frontmatter } = data.mdx;
+  const { title, description = "" } = frontmatter;
   const metaDescription = description || siteSubtitle;
 
   return (
-    <Layout
-      title={`${title} - ${siteTitle}`}
-      description={metaDescription}
-      socialImage={socialImage}
-    >
+    <Layout title={`${title} - ${siteTitle}`} description={metaDescription}>
       <Sidebar />
       <Page title={title}>
-        <div dangerouslySetInnerHTML={{ __html: body }} />
+        <MDXProvider>{children}</MDXProvider>
       </Page>
     </Layout>
   );
 };
 
 export const query = graphql`
-  query PageTemplate($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+  query ($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
-      html
       frontmatter {
         title
         date

@@ -45,33 +45,41 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions }) => {
     if (node?.frontmatter?.template === "page" && node?.fields?.slug) {
       createPage({
         path: node.fields.slug,
-        component: constants.templates.pageTemplate,
+        component: `${constants.templates.pageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
         context: { slug: node.fields.slug },
       });
     } else if (node?.frontmatter?.template === "post" && node?.fields?.slug) {
       createPage({
         path: node.fields.slug,
-        component: constants.templates.postTemplate,
+        component: `${constants.templates.postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
         context: { slug: node.fields.slug },
       });
     }
   });
 
-  const mdxPages = await queries.mdxPagesQuery(graphql);
+  // const mdxPages = await queries.mdxPagesQuery(graphql);
 
-  mdxPages.forEach((edge) => {
-    const { node } = edge;
+  // console.log("MDX")
+  // mdxPages.forEach((edge) => {
+  //   const { node } = edge;
+  //   // console.log(node.frontmatter)
+  //   console.log(node.fields)
+  //   if (node?.frontmatter?.template === "page" && node?.fields?.slug) {
 
-    if (node?.frontmatter?.template === "page" && node?.frontmatter?.slug) {
+  //     createPage({
+  //       path: node.fields.slug,
+  //       component: `${constants.templates.mdxPageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+  //       context: { slug: node.fields.slug },
+  //     });
+  //   } else if (node?.frontmatter?.template === "post" && node?.fields?.slug) {
 
-      createPage({
-        path: node.frontmatter.slug,
-        component: `${constants.templates.mdxPageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
-        context: { slug: node.frontmatter.slug },
-      });
-    }
-
-  })
+  //     createPage({
+  //       path: node.fields.slug,
+  //       component: `${constants.templates.postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+  //       context: { slug: node.fields.slug },
+  //     });
+  //   }
+  // })
 
   const createWithPagination: CreateWithPagination = ({
     group,

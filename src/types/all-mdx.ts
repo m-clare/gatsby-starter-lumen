@@ -5,7 +5,7 @@ interface AllMdx {
   group: Array<{
     fieldValue: string;
     totalCount: number;
-  }>
-};
+  }>;
+}
 
 export default AllMdx;
