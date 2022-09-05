@@ -19,6 +19,10 @@
     {
       "label": "Contact me",
       "path": "/pages/contacts"
+    },
+    {
+      "label": "D3 Demo",
+      "path": "/pages/circleVisual"
     }
   ],
   "author": {
