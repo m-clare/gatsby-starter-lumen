@@ -54,6 +54,14 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions }) => {
         component: `${constants.templates.postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
         context: { slug: node.fields.slug },
       });
+    } else if (node?.frontmatter?.template === "visual" && node?.fields?.slug) {
+      console.log("got here")
+      console.log(node.fields.slug)
+      createPage({
+        path: node.fields.slug,
+        component: constants.templates.dataVizTemplate,
+        context: {slug: node.fields.slug},
+      })
     }
   });
 
