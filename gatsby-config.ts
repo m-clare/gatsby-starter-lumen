@@ -35,6 +35,8 @@ export default {
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-copy-linked-files`,
           "gatsby-remark-external-links",
+          `gatsby-remark-smartypants`,
+          `gatsby-remark-emoji`,
         ],
         extensions: [`.md`, `.mdx`],
       },

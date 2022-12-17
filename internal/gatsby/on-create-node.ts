@@ -17,12 +17,12 @@ const onCreateNode: GatsbyNode["onCreateNode"] = ({
     const { tags, category, slug } = frontmatter || {};
 
     if (slug) {
-      const dirname = parent && getNode(parent)?.relativeDirectory;
+      // trim directory, to simplify route to just /pages and /posts (personal preference)
+      const dirname = parent && getNode(parent)?.relativeDirectory.split("/")[0];
       const value =
         typeof dirname === "string"
           ? utils.concat("/", dirname, "/", slug)
           : utils.concat("/", slug);
-
       createNodeField({ node, name: "slug", value });
     } else {
       const value = createFilePath({ node, getNode });
